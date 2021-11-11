@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "client.h"
 namespace Ui {
 class MainWindow;
 }
@@ -18,8 +18,15 @@ public:
 private slots:
     void on_pb_ajouter_clicked();
 
+    void on_pb_supp_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pb_modifier_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Client C;
 };
 
 #endif // MAINWINDOW_H

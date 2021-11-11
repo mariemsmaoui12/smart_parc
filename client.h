@@ -4,13 +4,16 @@
 #include<QSqlQuery>
 #include<QSqlQueryModel>
 #include <QDebug>
+#include<qsqlquerymodel.h>
+
 class Client
 {
+private:
     int idC;
     QString nom;
     QString prenom;
     QString Adresse_mail;
-    int age;
+    int Age;
 
 public:
     Client();
@@ -26,6 +29,10 @@ public:
     void set_Adresse_mail(QString);
     void set_age(int);
     bool ajouter();
+    QSqlQueryModel* afficher();
+    bool supprimer(int);
+    bool modifier();
+    bool rechercher(int idC);
 };
 
 #endif // CLIENT_H
