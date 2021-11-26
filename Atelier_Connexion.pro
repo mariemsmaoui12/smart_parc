@@ -4,7 +4,16 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+
+QT += network
+QT       += core gui sql printsupport multimedia
+QT += widgets multimedia
+TARGET = QTcpSocket
+CONFIG   += console
+CONFIG   -= app_bundle
+
+TEMPLATE = app
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,15 +34,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    QRcode.cpp \
     client.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    qcustomplot.cpp \
+    smtp.cpp
 
 HEADERS += \
+    QRcode.hhp \
     client.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    qcustomplot.h \
+    smtp.h
 
 FORMS += \
         mainwindow.ui

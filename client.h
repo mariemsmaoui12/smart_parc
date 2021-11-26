@@ -5,6 +5,7 @@
 #include<QSqlQueryModel>
 #include <QDebug>
 #include<qsqlquerymodel.h>
+#include<QSqlRecord>
 
 class Client
 {
@@ -32,7 +33,25 @@ public:
     QSqlQueryModel* afficher();
     bool supprimer(int);
     bool modifier();
-    bool rechercher(int idC);
+    QSqlQueryModel* rechercher_id(int);
+    QSqlQueryModel* triparAge();
+    QSqlQueryModel* rechercher_nom(QString );
+    QSqlQueryModel* rechercher_prenom(QString prenom);
+    QSqlQueryModel * rechercher_nomprenom(QString nom, QString prenom);
+    QSqlQueryModel * rechercher_nomid(QString nom, int idC);
+    QSqlQueryModel * rechercher_prenomid(QString nom, int idC);
+    QSqlQueryModel * rechercher_prenom_id_nom(QString prenom, int idC,QString nom);
+    void statistique(QVector<double>* ticks);
+    void statistique_1(QVector<double>* PlaceData);
+    void statistique_2(QVector<double>* PlaceData);
+    void statistique_3(QVector<double>* PlaceData);
+    void statistique_4(QVector<double>* PlaceData);
+    bool supprimer2(QString nom);
+    QSqlQueryModel* triparNom();
+   QSqlQueryModel* triparPrenom();
+   QSqlQueryModel* triparAgeD();
+   QSqlQueryModel* triparnomD();
+   QSqlQueryModel* triparPrenomD();
 };
 
 #endif // CLIENT_H
