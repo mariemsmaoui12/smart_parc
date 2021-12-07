@@ -69,16 +69,6 @@ bool menu::supprimer(QString id)
     query.bindValue(":id", id);
     return query.exec();
 }
-QSqlQueryModel *menu:: trie_menuid()
-{
-    QSqlQueryModel *model=new QSqlQueryModel();
-    model->setQuery("select *from MENU order by id" );
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("prix"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("etat"));
-return model;
-}
 QSqlQueryModel *menu:: trie_menuprix()
 {
     QSqlQueryModel *model=new QSqlQueryModel();
@@ -108,7 +98,7 @@ void menu::statistique(QVector<double>* ticks,QVector<QString> *labels)
 {
     QSqlQuery q;
     int i=0;
-    q.exec("select nom from MENU");
+    q.exec("select nom from MENU where prix>10");
     while (q.next())
     {
         QString identifiant = q.value(0).toString();

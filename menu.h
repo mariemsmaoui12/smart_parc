@@ -32,7 +32,6 @@ public:
      bool supprimer(QString id);
      void modifier();
      QSqlQueryModel* rechercher(QString id);
-     QSqlQueryModel* trie_menuid();
      QSqlQueryModel* trie_menuprix();
      void statistique(QVector<double>* ticks,QVector<QString> *labels);
 
