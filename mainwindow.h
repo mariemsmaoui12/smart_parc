@@ -19,11 +19,11 @@ private slots :
     void on_pb_enregistrer_clicked();
     void on_pushButton_2_clicked();
     void on_pb_supprimer_clicked();
-void on_pushButton_3_clicked();
+
     void on_pushButton_clicked();
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
-    void on_pb_send_clicked();
+
 
 
 void on_tabWidget_currentChanged(int index);

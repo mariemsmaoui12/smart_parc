@@ -48,21 +48,29 @@ void MainWindow::on_pb_enregistrer_clicked()
     float prix = ui->prix->text().toFloat();
     QString etat = ui->etat->text();
     menu m(id,nom,prix,etat);
-    if (bool test=m.ajouter()==false)
+    QString email= ui->lineEdit->text();
+    if  (bool test=m.ajouter()==false ||(email.isEmpty()))
 
                      {
                          QMessageBox::critical(0,qApp->tr("erreur"),qApp->tr("veillez remplir les champs vides."),QMessageBox::Cancel);
                      }
     else{
 
-        QMessageBox::critical(0,qApp->tr("success"),qApp->tr(" menu ajouté."),QMessageBox::Yes);
+        QMessageBox::critical(0,qApp->tr("success"),qApp->tr(" menu ajouté et un mail a éte envoyé au chef "),QMessageBox::Ok);
         ui->menus->setModel(tmpmenu.afficher());
+        Smtp* smtp = new Smtp("yahyafhima1@gmail.com", "Hackerway01", "smtp.gmail.com", 465);
+         connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+         QString m1=ui->lineEdit->text();
+         smtp->sendMail("yahyafhima1@gmail.com",m1, "Smart Park, menu!","Bienvenue! Vous-avez un nouveau menu!");
+ui->lineEdit->clear();
          ui->ref->clear();
          ui->nom->clear();
           ui->prix->clear();
            ui->etat->clear();
 
+
     }
+
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -96,7 +104,7 @@ me.modifier();
 }
 void MainWindow::on_pb_supprimer_clicked()
 {
-    QString ref = ui->ref->text();
+    QString ref = ui->lineEdit_3->text();
     if(ref.isEmpty())
         {
             QMessageBox::critical(0,qApp->tr("erreur"),
@@ -201,11 +209,7 @@ void MainWindow::on_pushButton_clicked()
 
                  delete document;
 }
-void MainWindow::on_pushButton_3_clicked()
-{
-    ui->menus->setModel(tmpmenu.trie_menuid());
 
-  }
 void MainWindow::on_pushButton_4_clicked()
 {
     ui->menus->setModel(tmpmenu.trie_menuprix());
@@ -213,18 +217,10 @@ void MainWindow::on_pushButton_4_clicked()
   }
 void MainWindow::on_pushButton_5_clicked()
 {
-    QString id = ui->ref->text();
+    QString id = ui->ref1->text();
     ui->menus->setModel(tmpmenu.rechercher(id));
 
   }
-void MainWindow::on_pb_send_clicked()
-{
-Smtp* smtp = new Smtp("yahyafhima1@gmail.com", "Hackerway01", "smtp.gmail.com", 465);
- connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
- QString m=ui->lineEdit->text();
- smtp->sendMail("yahyafhima1@gmail.com",m, "Smart Park, Nouvelle carte de fidelite!","Bienvenue! Vous-etes UN CLIENT fidele!");
-}
-
 
 
 
@@ -280,7 +276,7 @@ Smtp* smtp = new Smtp("yahyafhima1@gmail.com", "Hackerway01", "smtp.gmail.com", 
                           ui->plot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
 
                           QVector<double> PlaceData;
-                          QSqlQuery q1("select prix from MENU");
+                          QSqlQuery q1("select prix from MENU where prix>10");
                           while (q1.next()) {
                                         int  nbr_fautee = q1.value(0).toInt();
                                         PlaceData<< nbr_fautee;
